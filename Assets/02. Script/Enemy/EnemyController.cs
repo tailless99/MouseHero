@@ -4,6 +4,7 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Setting")]
     [SerializeField] public float moveSpeed = 1f;
+    [SerializeField] private GameObject deathVFX;
 
     [Header("ObjectPooling Use Name")]
     [SerializeField] string EnemyName;
@@ -12,6 +13,8 @@ public class EnemyController : MonoBehaviour
     protected CircleCollider2D myCollider;
     protected Rigidbody2D rb;
     protected EnemyStatus enemyStatus;
+    
+    private EnemyDropItem enemyDropItem;
 
     public bool isMoving = true;
 
@@ -20,6 +23,7 @@ public class EnemyController : MonoBehaviour
         myCollider = GetComponent<CircleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         enemyStatus = GetComponent<EnemyStatus>();
+        enemyDropItem = GetComponent<EnemyDropItem>();
     }
 
     protected virtual void Update() {
@@ -41,4 +45,7 @@ public class EnemyController : MonoBehaviour
             Attack(playerHitBox);
         }
     }
+
+    public GameObject GetDeathVFX() => deathVFX;
+    public void DropItem() => enemyDropItem.DropItem();
 }

@@ -28,6 +28,7 @@ public class EnemyStatus : MonoBehaviour
         
         // 죽음 체크
         if (currentHp <= 0) {
+            myEnemyController.isMoving = false;
             animator.SetBool("IsDead", true);
             return;
         }
@@ -39,13 +40,25 @@ public class EnemyStatus : MonoBehaviour
             myEnemyController.isMoving = false;
             IsHiting = true;
         }
+        Debug.Log($"Enemy Damage : {damage}");
     }
 
     // 에너미의 공격력을 반환
     public float GetAttack() => attack;
 
     // Animator에서 사용될 함수
-    public void Die() => this.gameObject.SetActive(false);
+    public void Die() {
+        // 폭발 이펙트 출력
+        var deathVFX = myEnemyController.GetDeathVFX();
+        if (deathVFX) Instantiate(deathVFX, this.gameObject.transform.position, Quaternion.identity);
+
+        // 드랍 아이템 지급
+        myEnemyController.DropItem();
+
+        // 사용 끝난 몬스터 비활성화
+        this.gameObject.SetActive(false);
+    }
+
     public void OnHitEnd() {
         myEnemyController.isMoving = true;
         IsHiting = false;
