@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class MainUIContainer : Singleton<MainUIContainer> {
+    [Header("Main UI Class")]
     [SerializeField] private PlayerHPSliderContainer hpSlider;
     [SerializeField] public MoneyContainer moneyContainer;
 
