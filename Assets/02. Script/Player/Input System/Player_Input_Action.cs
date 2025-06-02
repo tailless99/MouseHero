@@ -154,6 +154,34 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""OpenUI"",
+            ""id"": ""dc2e5254-4589-428e-b1e1-36cb01a55ef3"",
+            ""actions"": [
+                {
+                    ""name"": ""Status"",
+                    ""type"": ""Button"",
+                    ""id"": ""98d89381-2ae6-4f7c-a9d6-d0112e58c503"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bf2bf4f2-e28b-43ee-8219-b2a447005975"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Status"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -163,11 +191,15 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
         m_Attack_Z = m_Attack.FindAction("Z", throwIfNotFound: true);
         m_Attack_X = m_Attack.FindAction("X", throwIfNotFound: true);
         m_Attack_LeftMouse = m_Attack.FindAction("Left Mouse", throwIfNotFound: true);
+        // OpenUI
+        m_OpenUI = asset.FindActionMap("OpenUI", throwIfNotFound: true);
+        m_OpenUI_Status = m_OpenUI.FindAction("Status", throwIfNotFound: true);
     }
 
     ~@Player_Input_Action()
     {
         UnityEngine.Debug.Assert(!m_Attack.enabled, "This will cause a leak and performance issues, Player_Input_Action.Attack.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_OpenUI.enabled, "This will cause a leak and performance issues, Player_Input_Action.OpenUI.Disable() has not been called.");
     }
 
     /// <summary>
@@ -357,6 +389,102 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="AttackActions" /> instance referencing this action map.
     /// </summary>
     public AttackActions @Attack => new AttackActions(this);
+
+    // OpenUI
+    private readonly InputActionMap m_OpenUI;
+    private List<IOpenUIActions> m_OpenUIActionsCallbackInterfaces = new List<IOpenUIActions>();
+    private readonly InputAction m_OpenUI_Status;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "OpenUI".
+    /// </summary>
+    public struct OpenUIActions
+    {
+        private @Player_Input_Action m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public OpenUIActions(@Player_Input_Action wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "OpenUI/Status".
+        /// </summary>
+        public InputAction @Status => m_Wrapper.m_OpenUI_Status;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_OpenUI; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="OpenUIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(OpenUIActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="OpenUIActions" />
+        public void AddCallbacks(IOpenUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_OpenUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_OpenUIActionsCallbackInterfaces.Add(instance);
+            @Status.started += instance.OnStatus;
+            @Status.performed += instance.OnStatus;
+            @Status.canceled += instance.OnStatus;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="OpenUIActions" />
+        private void UnregisterCallbacks(IOpenUIActions instance)
+        {
+            @Status.started -= instance.OnStatus;
+            @Status.performed -= instance.OnStatus;
+            @Status.canceled -= instance.OnStatus;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="OpenUIActions.UnregisterCallbacks(IOpenUIActions)" />.
+        /// </summary>
+        /// <seealso cref="OpenUIActions.UnregisterCallbacks(IOpenUIActions)" />
+        public void RemoveCallbacks(IOpenUIActions instance)
+        {
+            if (m_Wrapper.m_OpenUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="OpenUIActions.AddCallbacks(IOpenUIActions)" />
+        /// <seealso cref="OpenUIActions.RemoveCallbacks(IOpenUIActions)" />
+        /// <seealso cref="OpenUIActions.UnregisterCallbacks(IOpenUIActions)" />
+        public void SetCallbacks(IOpenUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_OpenUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_OpenUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="OpenUIActions" /> instance referencing this action map.
+    /// </summary>
+    public OpenUIActions @OpenUI => new OpenUIActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Attack" which allows adding and removing callbacks.
     /// </summary>
@@ -385,5 +513,20 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLeftMouse(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "OpenUI" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="OpenUIActions.AddCallbacks(IOpenUIActions)" />
+    /// <seealso cref="OpenUIActions.RemoveCallbacks(IOpenUIActions)" />
+    public interface IOpenUIActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Status" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStatus(InputAction.CallbackContext context);
     }
 }

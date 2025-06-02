@@ -40,7 +40,6 @@ public class EnemyStatus : MonoBehaviour
             myEnemyController.isMoving = false;
             IsHiting = true;
         }
-        Debug.Log($"Enemy Damage : {damage}");
     }
 
     // 에너미의 공격력을 반환

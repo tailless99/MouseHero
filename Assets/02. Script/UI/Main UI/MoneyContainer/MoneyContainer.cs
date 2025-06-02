@@ -24,4 +24,6 @@ public class MoneyContainer : MonoBehaviour
     public bool CanUseMoney(int money) {
         return CurrentMoney >= money ? true : false;
     }
+
+    public int GetCurrentMoney() => CurrentMoney;
 }

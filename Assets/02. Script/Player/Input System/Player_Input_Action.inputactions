@@ -68,6 +68,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "OpenUI",
+            "id": "dc2e5254-4589-428e-b1e1-36cb01a55ef3",
+            "actions": [
+                {
+                    "name": "Status",
+                    "type": "Button",
+                    "id": "98d89381-2ae6-4f7c-a9d6-d0112e58c503",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bf2bf4f2-e28b-43ee-8219-b2a447005975",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Status",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

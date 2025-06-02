@@ -38,7 +38,7 @@ public class FullScreenUIManager : Singleton<FullScreenUIManager>
 #region
     public void OpenStatusFullScreenUI() {
         ToggleGamePause();
-        statusFullScreenUIContainer.gameObject.SetActive(true);
+        statusFullScreenUIContainer.ToggleActive();
     }
 
 #endregion
