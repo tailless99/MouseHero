@@ -5,6 +5,7 @@ public class Status_UI_Container : MonoBehaviour
 {
     [Header("GameObject")]
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI requiredCostText;
     public TextMeshProUGUI totalCostText;
     public GameObject confirmView; // Confirm View
     public GameObject scrollContent; // 스크롤 뷰의 컨텐트 영역 오브젝트
@@ -20,6 +21,7 @@ public class Status_UI_Container : MonoBehaviour
         // 초기화
         moneyText.text = MainUIContainer.Instance.GetCurrentMoney().ToString();
         totalCostText.text = totalCost.ToString();
+        requiredCostText.text = statusCost.ToString();
     }
 
     /// <summary>
