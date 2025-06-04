@@ -23,6 +23,7 @@ public class PlayerCharacterBase : MonoBehaviour
     [Header("Use Character Setteing")]
     [SerializeField] private string CharacterName;
 
+
     // 컴포넌트 모음
     private Player_Input_Action playerInput;
     private PlayerApplyDamage playerAttack;
@@ -50,6 +51,9 @@ public class PlayerCharacterBase : MonoBehaviour
 
         // 스테이터스 설정
         PlayerStatusManager.Instance.SetCharacterStatus(hp, strength, defence, luck);
+
+        // 스킬 매니저 초기화
+        SkillManager.Instance.InitializeSKillManager(CharacterName);
     }
 
     protected virtual void Update() {

@@ -27,16 +27,18 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T> {
     }
 
     protected virtual void Awake() {
-        if (instance != null && this.gameObject != null) {
-            Destroy(this.gameObject);
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
         }
-        else {
+
+        if (instance == null) // null 체크를 한 번 더 하여 확실하게 할당
+        {
             instance = (T)this;
         }
 
-        if (!gameObject.transform.parent) {
-            DontDestroyOnLoad(gameObject);
-        }
+        DontDestroyOnLoad(gameObject);
     }
 }
 
