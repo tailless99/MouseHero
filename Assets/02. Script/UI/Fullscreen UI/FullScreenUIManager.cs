@@ -3,6 +3,8 @@ using UnityEngine;
 public class FullScreenUIManager : Singleton<FullScreenUIManager>
 {
     [SerializeField] private Status_UI_Container statusFullScreenUIContainer;
+    [SerializeField] private SkillShopUIContainer skillShopUIContainer;
+    [SerializeField] private BackPackUIContainer backPackUIContainer;
 
     private bool isPaused = false;
 
@@ -15,7 +17,9 @@ public class FullScreenUIManager : Singleton<FullScreenUIManager>
     /// 모든 풀스크린 UI 클래스를 비활성화
     /// </summary>
     private void DeActiveAllFullScreenUI() {
-        //statusFullScreenUIContainer.gameObject.SetActive(false);
+        statusFullScreenUIContainer.gameObject.SetActive(false);
+        skillShopUIContainer.gameObject.SetActive(false);
+        backPackUIContainer.gameObject.SetActive(false);
     }
     
     /// <summary>
@@ -41,5 +45,14 @@ public class FullScreenUIManager : Singleton<FullScreenUIManager>
         statusFullScreenUIContainer.ToggleActive();
     }
 
+    public void OpenSkillShopUI() {
+        ToggleGamePause();
+        skillShopUIContainer.ToggleActive();
+    }
+
+    public void OpenBackPackUI() {
+        ToggleGamePause();
+        backPackUIContainer.ToggleActive();
+    }
 #endregion
 }

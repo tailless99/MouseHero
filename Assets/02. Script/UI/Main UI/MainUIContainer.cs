@@ -24,6 +24,7 @@ public class MainUIContainer : Singleton<MainUIContainer> {
 
         // 입력 버튼 바인딩
         playerInput.OpenUI.Status.performed += _ => OpenStatusUI();
+        playerInput.OpenUI.Inventory.performed += _ => OpenBackPack();
     }
 
 // 오버레이 캔버스 UI 함수 모음
@@ -44,5 +45,7 @@ public class MainUIContainer : Singleton<MainUIContainer> {
 // 풀스크린 UI 오픈 함수 모음
 #region
     private void OpenStatusUI() => fullScreenUIManager.OpenStatusFullScreenUI();
+    private void OpenSkillSHop() => fullScreenUIManager.OpenSkillShopUI();
+    private void OpenBackPack() => fullScreenUIManager.OpenBackPackUI();
 #endregion
 }

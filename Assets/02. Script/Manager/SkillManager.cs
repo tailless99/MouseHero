@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 public class SkillManager : Singleton<SkillManager>
@@ -17,6 +18,7 @@ public class SkillManager : Singleton<SkillManager>
         //currentCharacterAllSkillList = characterSkillSO.GetSkillsByCharacter(characterID);
         currentCharacterAllSkillList = characterSkillSO.GetSkillsByCharacter("NinjaFrog");
         hasSkillList.Clear();
+        hasSkillList = currentCharacterAllSkillList;
         isInitialized = true;
     }
 

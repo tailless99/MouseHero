@@ -10,4 +10,10 @@ public class SkillShopUIContainer : MonoBehaviour
         skillDetaill.Initialize_DetaillView(
             data.skillIcon, data.skillName, data.detailDescription, data.formula, data.cost);
     }
+
+    // 활성/비활성화 토글 함수
+    public void ToggleActive() {
+        bool isActive = this.gameObject.activeSelf;
+        this.gameObject.SetActive(!isActive);
+    }
 }

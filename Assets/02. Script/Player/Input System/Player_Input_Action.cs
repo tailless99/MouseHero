@@ -167,6 +167,15 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""76f0e72e-d861-4007-8d39-5d0494cbf734"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,17 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Status"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b1e4a8e-52b6-4781-b9da-a5d27d747c5d"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -194,6 +214,7 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
         // OpenUI
         m_OpenUI = asset.FindActionMap("OpenUI", throwIfNotFound: true);
         m_OpenUI_Status = m_OpenUI.FindAction("Status", throwIfNotFound: true);
+        m_OpenUI_Inventory = m_OpenUI.FindAction("Inventory", throwIfNotFound: true);
     }
 
     ~@Player_Input_Action()
@@ -394,6 +415,7 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_OpenUI;
     private List<IOpenUIActions> m_OpenUIActionsCallbackInterfaces = new List<IOpenUIActions>();
     private readonly InputAction m_OpenUI_Status;
+    private readonly InputAction m_OpenUI_Inventory;
     /// <summary>
     /// Provides access to input actions defined in input action map "OpenUI".
     /// </summary>
@@ -409,6 +431,10 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OpenUI/Status".
         /// </summary>
         public InputAction @Status => m_Wrapper.m_OpenUI_Status;
+        /// <summary>
+        /// Provides access to the underlying input action "OpenUI/Inventory".
+        /// </summary>
+        public InputAction @Inventory => m_Wrapper.m_OpenUI_Inventory;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -438,6 +464,9 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
             @Status.started += instance.OnStatus;
             @Status.performed += instance.OnStatus;
             @Status.canceled += instance.OnStatus;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         /// <summary>
@@ -452,6 +481,9 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
             @Status.started -= instance.OnStatus;
             @Status.performed -= instance.OnStatus;
             @Status.canceled -= instance.OnStatus;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         /// <summary>
@@ -528,5 +560,12 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStatus(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
