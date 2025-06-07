@@ -12,6 +12,7 @@ public class SkillManager : Singleton<SkillManager>
     private List<SkillSO> hasSkillList = new List<SkillSO>(); // 플레이어가 얻은 스킬 리스트
     private bool isInitialized = false; // 초기화 여부
 
+    const float maxHasCount = 100f;
 
     // 초기화 함수
     public void InitializeSKillManager(string characterID) {
@@ -24,7 +25,7 @@ public class SkillManager : Singleton<SkillManager>
 
     // 스킬 카드 뽑기에 사용될 스킬 반환 함수
     public SkillSO GetHasSkill() {
-        if (hasSkillList == null || hasSkillList.Count == 0 || !isInitialized) return null;
+        if (hasSkillList == null || hasSkillList.Count == 0 || !isInitialized || hasSkillList.Count >= maxHasCount) return null;
 
         int randomIndex = Random.Range(0, hasSkillList.Count);
         return hasSkillList[randomIndex];
