@@ -116,6 +116,94 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Skill",
+            "id": "c322ddd5-ee39-4046-b6de-84645f87a374",
+            "actions": [
+                {
+                    "name": "Use_SkillA",
+                    "type": "Button",
+                    "id": "c705c2f8-56a0-4ecd-ac72-bf4b95ec1b29",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use_SkillB",
+                    "type": "Button",
+                    "id": "14b86a61-b0ce-45ec-9710-0c367c774009",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use_SkillC",
+                    "type": "Button",
+                    "id": "9f0d7223-d375-4214-a951-c60989a70609",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AddSkill",
+                    "type": "Button",
+                    "id": "5a1caaf5-c665-4a5d-bc8a-77e0ecf61e70",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "84df861e-9505-4c77-9687-93a88008009a",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use_SkillA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4214113b-8d88-4793-8f8b-db11b2540e8e",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use_SkillB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9822e8b3-cb63-440e-bd20-2ed59d5429a9",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use_SkillC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e4b3db3-1c11-496a-9f24-a4f6d2d88db7",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

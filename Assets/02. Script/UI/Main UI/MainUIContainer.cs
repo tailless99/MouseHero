@@ -5,6 +5,7 @@ public class MainUIContainer : Singleton<MainUIContainer> {
     [Header("Main UI Class")]
     [SerializeField] private PlayerHPSliderContainer hpSlider;
     [SerializeField] public MoneyContainer moneyContainer;
+    [SerializeField] private UseSkillStackContainer useSkillStackContainer;
 
     [Header("FullScreen UI Class")]
     [SerializeField] public FullScreenUIManager fullScreenUIManager;
@@ -25,6 +26,10 @@ public class MainUIContainer : Singleton<MainUIContainer> {
         // 입력 버튼 바인딩
         playerInput.OpenUI.Status.performed += _ => OpenStatusUI();
         playerInput.OpenUI.Inventory.performed += _ => OpenBackPack();
+        playerInput.Skill.Use_SkillA.performed += _ => useSkillStackContainer.UseSkillCard(0);
+        playerInput.Skill.Use_SkillB.performed += _ => useSkillStackContainer.UseSkillCard(1);
+        playerInput.Skill.Use_SkillC.performed += _ => useSkillStackContainer.UseSkillCard(2);
+        playerInput.Skill.AddSkill.performed += _ => useSkillStackContainer.AddSkillCard();
     }
 
 // 오버레이 캔버스 UI 함수 모음

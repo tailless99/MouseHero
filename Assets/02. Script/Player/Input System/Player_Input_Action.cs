@@ -202,6 +202,94 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Skill"",
+            ""id"": ""c322ddd5-ee39-4046-b6de-84645f87a374"",
+            ""actions"": [
+                {
+                    ""name"": ""Use_SkillA"",
+                    ""type"": ""Button"",
+                    ""id"": ""c705c2f8-56a0-4ecd-ac72-bf4b95ec1b29"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use_SkillB"",
+                    ""type"": ""Button"",
+                    ""id"": ""14b86a61-b0ce-45ec-9710-0c367c774009"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use_SkillC"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f0d7223-d375-4214-a951-c60989a70609"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a1caaf5-c665-4a5d-bc8a-77e0ecf61e70"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""84df861e-9505-4c77-9687-93a88008009a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use_SkillA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4214113b-8d88-4793-8f8b-db11b2540e8e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use_SkillB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9822e8b3-cb63-440e-bd20-2ed59d5429a9"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use_SkillC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e4b3db3-1c11-496a-9f24-a4f6d2d88db7"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -215,12 +303,19 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
         m_OpenUI = asset.FindActionMap("OpenUI", throwIfNotFound: true);
         m_OpenUI_Status = m_OpenUI.FindAction("Status", throwIfNotFound: true);
         m_OpenUI_Inventory = m_OpenUI.FindAction("Inventory", throwIfNotFound: true);
+        // Skill
+        m_Skill = asset.FindActionMap("Skill", throwIfNotFound: true);
+        m_Skill_Use_SkillA = m_Skill.FindAction("Use_SkillA", throwIfNotFound: true);
+        m_Skill_Use_SkillB = m_Skill.FindAction("Use_SkillB", throwIfNotFound: true);
+        m_Skill_Use_SkillC = m_Skill.FindAction("Use_SkillC", throwIfNotFound: true);
+        m_Skill_AddSkill = m_Skill.FindAction("AddSkill", throwIfNotFound: true);
     }
 
     ~@Player_Input_Action()
     {
         UnityEngine.Debug.Assert(!m_Attack.enabled, "This will cause a leak and performance issues, Player_Input_Action.Attack.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_OpenUI.enabled, "This will cause a leak and performance issues, Player_Input_Action.OpenUI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Skill.enabled, "This will cause a leak and performance issues, Player_Input_Action.Skill.Disable() has not been called.");
     }
 
     /// <summary>
@@ -517,6 +612,135 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="OpenUIActions" /> instance referencing this action map.
     /// </summary>
     public OpenUIActions @OpenUI => new OpenUIActions(this);
+
+    // Skill
+    private readonly InputActionMap m_Skill;
+    private List<ISkillActions> m_SkillActionsCallbackInterfaces = new List<ISkillActions>();
+    private readonly InputAction m_Skill_Use_SkillA;
+    private readonly InputAction m_Skill_Use_SkillB;
+    private readonly InputAction m_Skill_Use_SkillC;
+    private readonly InputAction m_Skill_AddSkill;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Skill".
+    /// </summary>
+    public struct SkillActions
+    {
+        private @Player_Input_Action m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public SkillActions(@Player_Input_Action wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Skill/Use_SkillA".
+        /// </summary>
+        public InputAction @Use_SkillA => m_Wrapper.m_Skill_Use_SkillA;
+        /// <summary>
+        /// Provides access to the underlying input action "Skill/Use_SkillB".
+        /// </summary>
+        public InputAction @Use_SkillB => m_Wrapper.m_Skill_Use_SkillB;
+        /// <summary>
+        /// Provides access to the underlying input action "Skill/Use_SkillC".
+        /// </summary>
+        public InputAction @Use_SkillC => m_Wrapper.m_Skill_Use_SkillC;
+        /// <summary>
+        /// Provides access to the underlying input action "Skill/AddSkill".
+        /// </summary>
+        public InputAction @AddSkill => m_Wrapper.m_Skill_AddSkill;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Skill; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="SkillActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(SkillActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="SkillActions" />
+        public void AddCallbacks(ISkillActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SkillActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SkillActionsCallbackInterfaces.Add(instance);
+            @Use_SkillA.started += instance.OnUse_SkillA;
+            @Use_SkillA.performed += instance.OnUse_SkillA;
+            @Use_SkillA.canceled += instance.OnUse_SkillA;
+            @Use_SkillB.started += instance.OnUse_SkillB;
+            @Use_SkillB.performed += instance.OnUse_SkillB;
+            @Use_SkillB.canceled += instance.OnUse_SkillB;
+            @Use_SkillC.started += instance.OnUse_SkillC;
+            @Use_SkillC.performed += instance.OnUse_SkillC;
+            @Use_SkillC.canceled += instance.OnUse_SkillC;
+            @AddSkill.started += instance.OnAddSkill;
+            @AddSkill.performed += instance.OnAddSkill;
+            @AddSkill.canceled += instance.OnAddSkill;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="SkillActions" />
+        private void UnregisterCallbacks(ISkillActions instance)
+        {
+            @Use_SkillA.started -= instance.OnUse_SkillA;
+            @Use_SkillA.performed -= instance.OnUse_SkillA;
+            @Use_SkillA.canceled -= instance.OnUse_SkillA;
+            @Use_SkillB.started -= instance.OnUse_SkillB;
+            @Use_SkillB.performed -= instance.OnUse_SkillB;
+            @Use_SkillB.canceled -= instance.OnUse_SkillB;
+            @Use_SkillC.started -= instance.OnUse_SkillC;
+            @Use_SkillC.performed -= instance.OnUse_SkillC;
+            @Use_SkillC.canceled -= instance.OnUse_SkillC;
+            @AddSkill.started -= instance.OnAddSkill;
+            @AddSkill.performed -= instance.OnAddSkill;
+            @AddSkill.canceled -= instance.OnAddSkill;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="SkillActions.UnregisterCallbacks(ISkillActions)" />.
+        /// </summary>
+        /// <seealso cref="SkillActions.UnregisterCallbacks(ISkillActions)" />
+        public void RemoveCallbacks(ISkillActions instance)
+        {
+            if (m_Wrapper.m_SkillActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="SkillActions.AddCallbacks(ISkillActions)" />
+        /// <seealso cref="SkillActions.RemoveCallbacks(ISkillActions)" />
+        /// <seealso cref="SkillActions.UnregisterCallbacks(ISkillActions)" />
+        public void SetCallbacks(ISkillActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SkillActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SkillActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="SkillActions" /> instance referencing this action map.
+    /// </summary>
+    public SkillActions @Skill => new SkillActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Attack" which allows adding and removing callbacks.
     /// </summary>
@@ -567,5 +791,41 @@ public partial class @Player_Input_Action: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInventory(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Skill" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="SkillActions.AddCallbacks(ISkillActions)" />
+    /// <seealso cref="SkillActions.RemoveCallbacks(ISkillActions)" />
+    public interface ISkillActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Use_SkillA" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUse_SkillA(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Use_SkillB" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUse_SkillB(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Use_SkillC" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUse_SkillC(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AddSkill" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAddSkill(InputAction.CallbackContext context);
     }
 }
