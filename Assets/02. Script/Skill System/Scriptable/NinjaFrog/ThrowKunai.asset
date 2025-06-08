@@ -17,6 +17,6 @@ MonoBehaviour:
   description: Throw a kunai to attack a monster.
   detailDescription: "\rAttacks enemies by throwing three kunai in the direction
     of the mouse."
-  formula: '[ (player''s Streangs) * 150% ] * 3'
+  formula: '[ (Player''s Base Damge) * 150% ] * 3'
   skillIcon: {fileID: -4781989418326727855, guid: dbcbfe5a196e2b947b25fe43e754ca89, type: 3}
   skillLogicPrefab: {fileID: 9203643379353267896, guid: 1d182e23cf7f6bf4d93fa65787a89dff, type: 3}

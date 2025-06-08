@@ -28,6 +28,7 @@ public class EnemyStatus : MonoBehaviour
         
         // Á×À½ Ã¼Å©
         if (currentHp <= 0) {
+            myEnemyController.Die();
             myEnemyController.isMoving = false;
             animator.SetBool("IsDead", true);
             return;

@@ -89,4 +89,7 @@ public class PlayerCharacterBase : MonoBehaviour
             }
         }
     }
+
+    // 데미지 처리 클래스 반환
+    public PlayerApplyDamage GetPlayerApplyDamageClass() => playerAttack;
 }

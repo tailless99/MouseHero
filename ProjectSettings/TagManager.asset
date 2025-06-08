@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AimingBox
   - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX

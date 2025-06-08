@@ -48,4 +48,9 @@ public class EnemyController : MonoBehaviour
 
     public GameObject GetDeathVFX() => deathVFX;
     public void DropItem() => enemyDropItem.DropItem();
+    
+    // 에너미가 죽었을 때 작용하는 함수
+    public void Die() {
+        myCollider.gameObject.SetActive(false);
+    }
 }
