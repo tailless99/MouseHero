@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,8 +10,7 @@ public enum StatusType {
     Luck
 }
 
-public class PlayerStatusManager : Singleton<PlayerStatusManager>
-{
+public class PlayerStatusManager : Singleton<PlayerStatusManager> {
     private float currentHp;
 
     private readonly Dictionary<StatusType, float> statusDict = new Dictionary<StatusType, float>
@@ -45,6 +45,23 @@ public class PlayerStatusManager : Singleton<PlayerStatusManager>
                 MainUIContainer.Instance.UpdateHpPercent(maxHp / currentHp);
             }
         }
+    }
+
+    // 레벨업에 사용할 올스텟 + 1 함수
+    public void AddAllStatus() {
+        // HP를 제외한 스테이터스 전부 증가
+        foreach (StatusType type in Enum.GetValues(typeof(StatusType))) {
+            if (type != StatusType.HP)
+                statusDict[type] += 1;
+        }
+
+        // HP 증가는 별도의 작업이 필요하니 따로 처리
+        statusDict[StatusType.HP] += 1; // 최대 HP 증가
+        float maxHp = statusDict[StatusType.HP];
+        currentHp += 1; // 최대 hp가 증가한 만큼 같이 증가
+        
+        // UI 적용
+        MainUIContainer.Instance.UpdateHpPercent(maxHp / currentHp);
     }
 
     // 스테이터스를 가져온다

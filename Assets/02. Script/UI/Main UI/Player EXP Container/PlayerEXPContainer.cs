@@ -36,7 +36,8 @@ public class PlayerEXPContainer : MonoBehaviour
             playerLevel += 1; // 레벨 증가
 
             // 레벨업 이벤트
-            MainUIContainer.Instance.OpenLevelUpEvent();
+            PlayerStatusManager.Instance.AddAllStatus(); // 올스텟 + 1
+            MainUIContainer.Instance.OpenLevelUpEvent(); // 레벨업 UI 출력
         }
         UpdateUI();
     }
