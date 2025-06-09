@@ -5,6 +5,7 @@ public class FullScreenUIManager : Singleton<FullScreenUIManager>
     [SerializeField] private Status_UI_Container statusFullScreenUIContainer;
     [SerializeField] private SkillShopUIContainer skillShopUIContainer;
     [SerializeField] private BackPackUIContainer backPackUIContainer;
+    [SerializeField] private LevelUpEffectContainer levelUpEffectContainer;
 
     private bool isPaused = false;
 
@@ -20,6 +21,7 @@ public class FullScreenUIManager : Singleton<FullScreenUIManager>
         statusFullScreenUIContainer.gameObject.SetActive(false);
         skillShopUIContainer.gameObject.SetActive(false);
         backPackUIContainer.gameObject.SetActive(false);
+        levelUpEffectContainer.gameObject.SetActive(false);
     }
     
     /// <summary>
@@ -53,6 +55,11 @@ public class FullScreenUIManager : Singleton<FullScreenUIManager>
     public void OpenBackPackUI() {
         ToggleGamePause();
         backPackUIContainer.ToggleActive();
+    }
+
+    public void OpenLevelUpEffectUI() {
+        ToggleGamePause();
+        levelUpEffectContainer.ToggleActive();
     }
 #endregion
 }

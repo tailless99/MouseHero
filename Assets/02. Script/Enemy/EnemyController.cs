@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
     protected CircleCollider2D myCollider;
     protected Rigidbody2D rb;
     protected EnemyStatus enemyStatus;
-    
+
     private EnemyDropItem enemyDropItem;
 
     public bool isMoving = true;
@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
     
     // 에너미가 죽었을 때 작용하는 함수
     public void Die() {
+        MainUIContainer.Instance.AddExp(enemyDropItem.GetExp());
         myCollider.gameObject.SetActive(false);
     }
 }

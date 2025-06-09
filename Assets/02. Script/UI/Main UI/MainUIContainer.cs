@@ -6,6 +6,7 @@ public class MainUIContainer : Singleton<MainUIContainer> {
     [SerializeField] private PlayerHPSliderContainer hpSlider;
     [SerializeField] public MoneyContainer moneyContainer;
     [SerializeField] private UseSkillStackContainer useSkillStackContainer;
+    [SerializeField] private PlayerEXPContainer playerEXPContainer;
 
     [Header("FullScreen UI Class")]
     [SerializeField] public FullScreenUIManager fullScreenUIManager;
@@ -45,12 +46,19 @@ public class MainUIContainer : Singleton<MainUIContainer> {
 
     // 소모 골드보다 많은 골드를 가지고 있는지 체크
     public bool CanUseMoney(int money) => moneyContainer.CanUseMoney(money);
+
+    // 경험치 획득
+    public void AddExp(float exp) => playerEXPContainer.AddExp(exp);
+
+    // 플레이어 레벨 반환
+    public int GetLevel() => playerEXPContainer.GetLevel();
 #endregion
 
-// 풀스크린 UI 오픈 함수 모음
-#region
+    // 풀스크린 UI 오픈 함수 모음
+    #region
     private void OpenStatusUI() => fullScreenUIManager.OpenStatusFullScreenUI();
     private void OpenSkillSHop() => fullScreenUIManager.OpenSkillShopUI();
     private void OpenBackPack() => fullScreenUIManager.OpenBackPackUI();
+    public void OpenLevelUpEvent() => fullScreenUIManager.OpenLevelUpEffectUI();
 #endregion
 }

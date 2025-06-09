@@ -13,6 +13,10 @@ public class ObjectPoolingManager : Singleton<ObjectPoolingManager>
     [Header("Enemy")]
     [SerializeField] public GameObject virtualGuy_Prefab;
 
+    // 인스턴트 되는 오브젝트가 생성될 위치
+    [Header("Spawn Position Object")]
+    [SerializeField] public Transform parentObj;
+
     // 오브젝트 풀링 리스트
     [SerializeField] GameObject[] frogBaseAttack;
     [SerializeField] GameObject[] damageText;
@@ -34,12 +38,12 @@ public class ObjectPoolingManager : Singleton<ObjectPoolingManager>
 
         // UI
         for (int i = 0; i < damageText.Length; i++) {
-            damageText[i] = Instantiate(damageText_Prefab);
+            damageText[i] = Instantiate(damageText_Prefab, parentObj);
             damageText[i].SetActive(false);
         }
         // Enemy
         for (int i = 0; i < virtualGuy.Length; i++) {
-            virtualGuy[i] = Instantiate(virtualGuy_Prefab);
+            virtualGuy[i] = Instantiate(virtualGuy_Prefab, parentObj);
             virtualGuy[i].SetActive(false);
         }
 
@@ -54,7 +58,7 @@ public class ObjectPoolingManager : Singleton<ObjectPoolingManager>
                 // Player Base Attack
                 frogBaseAttack = new GameObject[100];
                 for (int i = 0; i < frogBaseAttack.Length; i++) {
-                    frogBaseAttack[i] = Instantiate(frogBaseAttack_Prefab);
+                    frogBaseAttack[i] = Instantiate(frogBaseAttack_Prefab, parentObj);
                     frogBaseAttack[i].SetActive(false);
                 }
                 break;
