@@ -6,7 +6,9 @@ public class LevelUpEffectContainer : MonoBehaviour
     [SerializeField] private GameObject levelUpRewardShop;
 
 
-    public void OnClickNextButton() {
+    // 리워드 UI를 열기위한 함수
+    public void OpenRewardUI() {
+        this.gameObject.SetActive(true);
         levelUpEffectWindo.SetActive(false);
         levelUpRewardShop.SetActive(true);
     }
@@ -15,5 +17,7 @@ public class LevelUpEffectContainer : MonoBehaviour
     public void ToggleActive() {
         bool isActive = this.gameObject.activeSelf;
         this.gameObject.SetActive(!isActive);
+        levelUpEffectWindo.SetActive(true);
+        levelUpRewardShop.SetActive(false);
     }
 }

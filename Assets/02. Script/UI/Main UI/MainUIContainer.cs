@@ -57,7 +57,6 @@ public class MainUIContainer : Singleton<MainUIContainer> {
     // 풀스크린 UI 오픈 함수 모음
     #region
     private void OpenStatusUI() => fullScreenUIManager.OpenStatusFullScreenUI();
-    private void OpenSkillSHop() => fullScreenUIManager.OpenSkillShopUI();
     private void OpenBackPack() => fullScreenUIManager.OpenBackPackUI();
     public void OpenLevelUpEvent() => fullScreenUIManager.OpenLevelUpEffectUI();
 #endregion

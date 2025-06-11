@@ -42,7 +42,7 @@ public class PlayerStatusManager : Singleton<PlayerStatusManager> {
             if (type == StatusType.HP) {
                 float maxHp = statusDict[type];
                 currentHp += value; // 최대 hp가 증가한 만큼 같이 증가
-                MainUIContainer.Instance.UpdateHpPercent(maxHp / currentHp);
+                MainUIContainer.Instance.UpdateHpPercent(currentHp / maxHp);
             }
         }
     }
@@ -54,14 +54,14 @@ public class PlayerStatusManager : Singleton<PlayerStatusManager> {
             if (type != StatusType.HP)
                 statusDict[type] += 1;
         }
-
+        
         // HP 증가는 별도의 작업이 필요하니 따로 처리
         statusDict[StatusType.HP] += 1; // 최대 HP 증가
         float maxHp = statusDict[StatusType.HP];
         currentHp += 1; // 최대 hp가 증가한 만큼 같이 증가
         
         // UI 적용
-        MainUIContainer.Instance.UpdateHpPercent(maxHp / currentHp);
+        MainUIContainer.Instance.UpdateHpPercent(currentHp / maxHp);
     }
 
     // 스테이터스를 가져온다
@@ -76,6 +76,18 @@ public class PlayerStatusManager : Singleton<PlayerStatusManager> {
 
         // 체력이 0 이하로 내려가지 않도록 Clamp
         currentHp = Mathf.Max(0, currentHp);
+        float hpPercent = currentHp / maxHp;
+
+        // UI 갱신
+        MainUIContainer.Instance.UpdateHpPercent(hpPercent);
+    }
+
+    public void PlayerHealing(float healingPoint) {
+        float maxHp = statusDict[StatusType.HP]; // 최대 체력
+        currentHp += healingPoint;
+
+        // 현재 체력은 최대 체력을 넘을 수 없다
+        if (currentHp >= maxHp) currentHp = maxHp;
         float hpPercent = currentHp / maxHp;
 
         // UI 갱신
