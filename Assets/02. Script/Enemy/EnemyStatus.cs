@@ -30,6 +30,7 @@ public class EnemyStatus : MonoBehaviour
         if (currentHp <= 0) {
             myEnemyController.Die();
             myEnemyController.isMoving = false;
+            Die();
             animator.SetBool("IsDead", true);
             return;
         }
@@ -54,7 +55,7 @@ public class EnemyStatus : MonoBehaviour
 
         // 드랍 아이템 지급
         myEnemyController.DropItem();
-
+        
         // 사용 끝난 몬스터 비활성화
         this.gameObject.SetActive(false);
     }

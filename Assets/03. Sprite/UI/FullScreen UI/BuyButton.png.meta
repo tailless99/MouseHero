@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f047b0ba8a5059a4aa843f8c1a3e45d4
+guid: c5f97a47f30cd9f4a97bda0fa2ba64ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7039122582138040449
-    second: card fantasy back_0
+      213: 2893777669117545954
+    second: BuyButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: card fantasy back_0
+      name: BuyButton_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 744
-        height: 1039
+        width: 92
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 180b4ce81bcffa160800000000000000
-      internalID: 7039122582138040449
+      spriteID: 2ed85ba4573c82820800000000000000
+      internalID: 2893777669117545954
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      card fantasy back_0: 7039122582138040449
+      BuyButton_0: 2893777669117545954
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

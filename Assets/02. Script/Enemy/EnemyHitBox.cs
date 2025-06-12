@@ -31,7 +31,7 @@ public class EnemyHitBox : MonoBehaviour
                 damageText.color = criticalColor; 
             }
         }
-
+        
         // 데미지 처리
         enemyStatus.GetDamage(damage);
     }

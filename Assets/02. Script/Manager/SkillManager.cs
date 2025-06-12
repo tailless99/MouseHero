@@ -14,18 +14,39 @@ public class SkillManager : Singleton<SkillManager>
 
     const float maxHasCount = 100f;
 
+    private void Start() {
+        hasSkillList.Clear();
+    }
+
     // 초기화 함수
     public void InitializeSKillManager(string characterID) {
         //currentCharacterAllSkillList = characterSkillSO.GetSkillsByCharacter(characterID);
         currentCharacterAllSkillList = characterSkillSO.GetSkillsByCharacter("NinjaFrog");
         hasSkillList.Clear();
-        hasSkillList = currentCharacterAllSkillList;
         isInitialized = true;
+    }
+
+    // 새로운 스킬을 추가할 수 있는지 체크하는 기능
+    public bool CanAddNewSkill() {
+        return hasSkillList.Count >= maxHasCount ? false : true;
+    }
+
+    // 스킬을 얻는 기능
+    public void AddNewSkill(SkillSO skill) {
+        if (hasSkillList.Count >= maxHasCount) return;
+        hasSkillList.Add(skill);
+    }
+
+    // 얻은 스킬을 삭제하는 기능
+    public void DeleteHasSkill(SkillSO skill) {
+        if (skill == null || !hasSkillList.Contains(skill)) return;
+
+        hasSkillList.Remove(skill);
     }
 
     // 스킬 카드 뽑기에 사용될 스킬 반환 함수
     public SkillSO GetHasSkill() {
-        if (hasSkillList == null || hasSkillList.Count == 0 || !isInitialized || hasSkillList.Count >= maxHasCount) return null;
+        if (hasSkillList == null || hasSkillList.Count == 0 || !isInitialized) return null;
 
         int randomIndex = Random.Range(0, hasSkillList.Count);
         return hasSkillList[randomIndex];

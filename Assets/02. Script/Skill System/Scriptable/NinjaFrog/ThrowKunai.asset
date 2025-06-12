@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ThrowKunai
   m_EditorClassIdentifier: 
   skillName: Throw Kunai
-  cost: 30
+  cost: 1
   description: Throw a kunai to attack a monster.
   detailDescription: "\rAttacks enemies by throwing three kunai in the direction
     of the mouse."
