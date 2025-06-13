@@ -1,13 +1,19 @@
 using UnityEngine;
 
 public class MouseFollowerLimited : MonoBehaviour {
-    public float followSpeed = 1000f; // 마우스 따라가는 스피드
+    [SerializeField] private float followSpeed = 1000f; // 마우스 따라가는 스피드
     [SerializeField] private Collider2D aimingBoxCollider;
+
+    private Camera mainCamera;
+
+    private void Awake() {
+        mainCamera = Camera.main;
+    }
 
     void Update() {
         if (aimingBoxCollider == null) return;
 
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPosition.z = 0f;
 
         // AimingBox 콜라이더 내부에 있는지 확인

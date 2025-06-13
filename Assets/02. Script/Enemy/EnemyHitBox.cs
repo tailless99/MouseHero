@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +8,12 @@ public class EnemyHitBox : MonoBehaviour
 
     private CircleCollider2D myCollider;
     private EnemyStatus enemyStatus;
+    private EnemyController enemyController;
 
     private void Awake() {
         myCollider = GetComponent<CircleCollider2D>();
         enemyStatus = GetComponent<EnemyStatus>();
+        enemyController = GetComponent<EnemyController>();
     }
 
     //  데미지를 입을 때 출력되는 함수
@@ -31,8 +34,19 @@ public class EnemyHitBox : MonoBehaviour
                 damageText.color = criticalColor; 
             }
         }
-        
+
+        // 에너미 경직 코루틴
+        StartCoroutine(StopMoveCoroutine());
+
         // 데미지 처리
         enemyStatus.GetDamage(damage);
+    }
+
+    // 에너미의 경직을 조절
+    private IEnumerator StopMoveCoroutine() {
+        enemyController.isMoving = false;
+        yield return new WaitForSeconds(0.5f);
+
+        enemyController.isMoving = true;
     }
 }

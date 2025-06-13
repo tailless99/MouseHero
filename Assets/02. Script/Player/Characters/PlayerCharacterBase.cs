@@ -27,6 +27,8 @@ public class PlayerCharacterBase : MonoBehaviour
     // 컴포넌트 모음
     private Player_Input_Action playerInput;
     private PlayerApplyDamage playerAttack;
+    private SpriteRenderer spriteRenderer;
+    private Camera mainCamera;
 
     // 사용 변수 모음
     private float currentAttackCoolTime = 0f;
@@ -35,6 +37,8 @@ public class PlayerCharacterBase : MonoBehaviour
     private void Awake() {
         playerInput = new Player_Input_Action();
         playerAttack = GetComponent<PlayerApplyDamage>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        mainCamera = Camera.main;
     }
 
     private void Start() {
@@ -57,9 +61,19 @@ public class PlayerCharacterBase : MonoBehaviour
     }
 
     protected virtual void Update() {
-        if(currentAttackCoolTime > 0) {
+        LookMouse();
+
+        if (currentAttackCoolTime > 0) {
             currentAttackCoolTime -= Time.deltaTime;
         }
+    }
+
+    // 캐릭터가 마우스 방향을 바라보도록 Flip하는 기능
+    private void LookMouse() {
+        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 dir = (mousePos - this.gameObject.transform.position).normalized;
+        if (dir.x < 0) spriteRenderer.flipX = true;
+        else spriteRenderer.flipX = false;
     }
 
     // 자식 클래스에서 재정의되는 공격 함수

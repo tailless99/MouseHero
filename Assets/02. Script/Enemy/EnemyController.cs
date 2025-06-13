@@ -4,7 +4,7 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Setting")]
     [SerializeField] public float moveSpeed = 1f;
-    [SerializeField] private GameObject deathVFX;
+    [SerializeField] protected GameObject deathVFX;
 
     [Header("ObjectPooling Use Name")]
     [SerializeField] string EnemyName;
@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     protected CircleCollider2D myCollider;
     protected Rigidbody2D rb;
     protected EnemyStatus enemyStatus;
+    protected PlayerCharacterBase player;
+    protected SpriteRenderer spriteRenderer;
 
     private EnemyDropItem enemyDropItem;
 
@@ -24,16 +26,37 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         enemyStatus = GetComponent<EnemyStatus>();
         enemyDropItem = GetComponent<EnemyDropItem>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    private void Start() {
+        player = PlayerController.Instance.GetCharacter();
     }
 
     protected virtual void Update() {
+        LookPlayer();
+
         if (isMoving) {
             Move();
+        }
+        else {
+            rb.linearVelocity = Vector2.zero;
         }
     }
 
     // 플레이어를 향해 움직이는 함수
-    protected virtual void Move() {}
+    protected virtual void Move() {
+        animator.SetBool("IsMoving", true);
+
+        Vector3 dir = (player.transform.position - this.gameObject.transform.position).normalized * moveSpeed;
+        rb.linearVelocity = new Vector2(dir.x, dir.y);
+    }
+
+    // 플레이어를 바라보도록 Flip하는 기능
+    private void LookPlayer() {
+        Vector3 dir = (player.transform.position - this.gameObject.transform.position).normalized;
+        if (dir.x < 0) spriteRenderer.flipX = true;
+        else spriteRenderer.flipX = false;
+    }
 
     // 몸박 공격
     protected virtual void Attack(PlayerHitBox player) {}
