@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NinjaFrog_Skill:
   - {fileID: 11400000, guid: bacaf741070c97e48b48746649d42621, type: 2}
-  - {fileID: 11400000, guid: bacaf741070c97e48b48746649d42621, type: 2}
-  - {fileID: 11400000, guid: bacaf741070c97e48b48746649d42621, type: 2}
+  - {fileID: 11400000, guid: deb25208c021fa248a8953e063797a1f, type: 2}

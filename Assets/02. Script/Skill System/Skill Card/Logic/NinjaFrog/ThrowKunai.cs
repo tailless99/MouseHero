@@ -5,8 +5,8 @@ public class ThrowKunai : SkillBase
     public GameObject projectilePrefab;
     public float speed = 10f;
 
-    public override void Use() {
-        if (projectilePrefab == null) return;
+    public override bool Use() {
+        if (projectilePrefab == null) return false;
         
         // 진행 방향 설정
         var player = PlayerController.Instance.GetCharacter();
@@ -27,6 +27,8 @@ public class ThrowKunai : SkillBase
             GameObject proj = Instantiate(projectilePrefab, player.transform.position, rot);
             proj.GetComponent<Rigidbody2D>().linearVelocity = dir * speed;
         }
+
+        return true;
     }
 
     // 벡터를 주어진 각도로 회전시키는 함수

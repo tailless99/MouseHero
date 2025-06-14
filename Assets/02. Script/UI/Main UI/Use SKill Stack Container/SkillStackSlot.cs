@@ -28,7 +28,10 @@ public class SkillStackSlot : MonoBehaviour
     /// 등록된 스킬을 사용하고, 슬롯을 다시 초기화 시키는 함수
     /// </summary>
     public void UseSkillCard() {
-        currentSkillObject?.skillLogicPrefab?.Use(); // 스킬의 발동 로직 실행
+        var result = currentSkillObject?.skillLogicPrefab?.Use(); // 스킬의 발동 로직 실행
+
+        // 만약 스킬을 실행할 수 없는 상태라면 반환
+        if (result == false || result == null) return;
 
         // 초기화
         currentSkillObject = null;

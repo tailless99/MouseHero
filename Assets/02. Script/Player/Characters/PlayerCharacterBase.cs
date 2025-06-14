@@ -64,7 +64,7 @@ public class PlayerCharacterBase : MonoBehaviour
         LookMouse();
 
         if (currentAttackCoolTime > 0) {
-            currentAttackCoolTime -= Time.deltaTime;
+            currentAttackCoolTime -= Time.unscaledDeltaTime;
         }
     }
 
@@ -95,7 +95,6 @@ public class PlayerCharacterBase : MonoBehaviour
         attackEffect.transform.rotation = Quaternion.identity;
 
         RaycastHit2D ray = Physics2D.Raycast(mousePos, Vector2.zero, 0.1f, LayerMask.GetMask("Enemy"));
-
         if(ray) {
             if (ray.collider.gameObject.TryGetComponent<EnemyHitBox>(out EnemyHitBox enemyHitBox)) {
                 float damage = playerAttack.GetAttackBaseDamage();
