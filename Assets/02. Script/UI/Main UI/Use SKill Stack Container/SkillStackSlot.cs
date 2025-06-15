@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class SkillStackSlot : MonoBehaviour
     [SerializeField] private SkillSO currentSkillObject; // 현재 삽입된 스킬 정보
     private bool isUseSlot;
 
-    private void Start() {
+    private void Awake() {
         skillStackImg = GetComponent<Image>();
     }
 
@@ -34,6 +35,8 @@ public class SkillStackSlot : MonoBehaviour
         if (result == false || result == null) return;
 
         // 초기화
+        this.gameObject.transform.parent.gameObject.SetActive(false);
+        // 이후 투명해지는 연출
         currentSkillObject = null;
         skillStackImg.sprite = emptyImg;
         isUseSlot = false;

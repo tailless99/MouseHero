@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4581da45c9651fb46baae09d60fbc4a7, type: 3}
+  m_Name: GetGold
+  m_EditorClassIdentifier: 
+  skillName: Get Gold
+  cost: 1
+  description: You get money by using skills
+  detailDescription: When you use a skill, you get 30 gold.
+  formula: Get 30 Money
+  skillIcon: {fileID: 774373310704334281, guid: 2de75df9b4c0d644791d6fb13669a965, type: 3}
+  skillLogicPrefab: {fileID: 4783395948600579121, guid: 2767d37a69d01b14a9370e6afe7caf16, type: 3}

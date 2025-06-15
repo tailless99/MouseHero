@@ -15,3 +15,5 @@ MonoBehaviour:
   NinjaFrog_Skill:
   - {fileID: 11400000, guid: bacaf741070c97e48b48746649d42621, type: 2}
   - {fileID: 11400000, guid: deb25208c021fa248a8953e063797a1f, type: 2}
+  - {fileID: 11400000, guid: 82fe4ea713d416043a8eeef0e3e4cf1f, type: 2}
+  - {fileID: 11400000, guid: 6e0b39b823df7b844abffd67b19793a9, type: 2}

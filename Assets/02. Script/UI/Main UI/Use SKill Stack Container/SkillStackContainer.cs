@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SkillStackContainer : MonoBehaviour
 {
-    [SerializeField] private List<SkillStackSlot> slots;
+    //[SerializeField] private List<SkillStackSlot> slots;
+    [SerializeField] private List<GameObject> slots;
     [SerializeField] int addSkillCost;
 
     /// <summary>
@@ -12,11 +13,24 @@ public class SkillStackContainer : MonoBehaviour
     /// 슬롯이 전부 사용중인 경우 : false를 반환
     /// 슬롯이 전부 사용중이지 않은 경우 : 해당 슬롯에 새로 드로우한 스킬을 삽입하고, true 반환
     /// </summary>
+    //public bool FindDeActiveSlot() {
+    //    foreach(var slot in slots) {
+    //        if(!slot.IsUsedSlot()) {
+    //            var skill = SkillManager.Instance.GetHasSkill();
+    //            slot.SlotSetting(skill);
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
     public bool FindDeActiveSlot() {
-        foreach(var slot in slots) {
-            if(!slot.IsUsedSlot()) {
+        foreach (var slot in slots) {
+            if (!slot.gameObject.activeSelf) { // 사용중이 아닐 때
+                slot.gameObject.SetActive(true);
+
+                var ImgObject = slot.GetComponentInChildren<SkillStackSlot>();
                 var skill = SkillManager.Instance.GetHasSkill();
-                slot.SlotSetting(skill);
+                ImgObject.SlotSetting(skill);
                 return true;
             }
         }
@@ -30,7 +44,7 @@ public class SkillStackContainer : MonoBehaviour
         
         // 스킬 추가
         if (!FindDeActiveSlot()) return;
-
+        
         // 스킬 추가 완료 후 소지금 차감
         MainUIContainer.Instance.UpdateMoney(-addSkillCost);
     }
@@ -44,13 +58,13 @@ public class SkillStackContainer : MonoBehaviour
     public void UseSkillCard(int index) {
         switch (index) {
             case 0:
-                slots[0].UseSkillCard();
+                slots[0].GetComponentInChildren<SkillStackSlot>().UseSkillCard();
                 break;
             case 1:
-                slots[1].UseSkillCard();
+                slots[1].GetComponentInChildren<SkillStackSlot>().UseSkillCard();
                 break;
             case 2:
-                slots[2].UseSkillCard();
+                slots[2].GetComponentInChildren<SkillStackSlot>().UseSkillCard();
                 break;
         }
     }
