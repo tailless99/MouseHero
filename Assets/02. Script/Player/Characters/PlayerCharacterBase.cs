@@ -105,4 +105,7 @@ public class PlayerCharacterBase : MonoBehaviour
 
     // 데미지 처리 클래스 반환
     public PlayerApplyDamage GetPlayerApplyDamageClass() => playerAttack;
+
+    // 데미지 업데이트
+    public void UpdateAttackPoint() => playerAttack.UpdatePlayerStatus();
 }

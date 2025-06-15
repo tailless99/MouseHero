@@ -25,7 +25,7 @@ public class PlayerApplyDamage : MonoBehaviour
     public void UpdatePlayerStatus() {
         // 기본 데미지 업데이트
         attackBaseDamage = PlayerStatusManager.Instance.GetStatus(StatusType.Strength) * ATTACK_CORRCTION;
-
+        
         // 소수점이 있을 경우
         if (attackBaseDamage != Mathf.Floor(attackBaseDamage)) {
             attackBaseDamage = Mathf.FloorToInt(attackBaseDamage) + 1;

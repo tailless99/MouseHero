@@ -14,15 +14,29 @@ public class BulletTime : SkillBase
         var player = PlayerController.Instance.GetCharacter().GetComponent<NinjaFrog>();
         var currentMoney = MainUIContainer.Instance.GetCurrentMoney();
         var useMoney = 0; // 실제 사용 금액
-
-        // 불릿타임 시작
-        var result = player.BulletTime(stopTime, useMoney);
         
         // 지출된 돈 계산
         if (currentMoney > 200) useMoney = 200;
-        else useMoney = (currentMoney - 200) * -1;
+        else useMoney = currentMoney;
         
+        // 필드의 몬스터 미리 색적
+        var allMonsters = GameObject.FindGameObjectsWithTag("Enemy");
 
+        // 불릿타임 시작
+        var result = player.BulletTime(stopTime, useMoney);
+        if (!result) return false; // 불릿 타임이 사용중이라면 사용불가
+
+        // 필드의 모든 몬스터에게 슬로우
+        foreach(var monster in allMonsters) {
+            monster.TryGetComponent<EnemyController>(out var enemy);
+            enemy.EnemySlowlyRoutine(stopTime);
+        }
+
+        // 보스 몬스터에게 슬로우
+        var bossMonster = GameObject.FindGameObjectWithTag("Boss");
+        if(bossMonster != null) {
+            // 보스몬스터 슬로우 로직
+        }
         return true;
     }
 }

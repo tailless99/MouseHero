@@ -15,7 +15,7 @@ public class NinjaFrog : PlayerCharacterBase
         if (bulletTimeEffect.activeSelf) return false;
         bulletTimeEffect.SetActive(true); // 불릿 타임 타이머 이펙트 활성화
 
-        BulletTimeStart(time, moneySpent);
+        StartCoroutine(BulletTimeStart(time, moneySpent));
 
         return true;
     }
@@ -23,13 +23,13 @@ public class NinjaFrog : PlayerCharacterBase
     private IEnumerator BulletTimeStart(float time, int moneySpent) {
         // 비용 소모
         MainUIContainer.Instance.UpdateMoney(-moneySpent);
-
+        
         // 스텟 증가
         var str = PlayerStatusManager.Instance.GetStatus(StatusType.Strength);
-        var addStr = ((moneySpent * 1.1f) + (str * 1.5f)) * str; // 스텟 증가량
+        var addStr = (moneySpent * 1.1f) + (str * 1.5f); // 스텟 증가량
         PlayerStatusManager.Instance.AddStatus(StatusType.Strength, addStr); // 스텟 증가
-        yield return new WaitForSecondsRealtime(time);
-
+        yield return new WaitForSeconds(time);
+        
         // 지속 시간 종료 후 스테이터스 원상복귀
         PlayerStatusManager.Instance.AddStatus(StatusType.Strength, -addStr); // 스텟 감소
     }

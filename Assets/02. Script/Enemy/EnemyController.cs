@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -76,5 +77,20 @@ public class EnemyController : MonoBehaviour
     public void Die() {
         MainUIContainer.Instance.AddExp(enemyDropItem.GetExp());
         myCollider.gameObject.SetActive(false);
+    }
+
+    // 에너미의 움직임을 느려지게 하는 코루틴
+    public void EnemySlowlyRoutine(float time) {
+        StartCoroutine(EnemySlolyCoroutine(time));
+    }
+
+    // 에너미 일정시간 느려지는 코루틴
+    private IEnumerator EnemySlolyCoroutine(float time) {
+        var originSpeed = moveSpeed;
+        moveSpeed *= 0.1f;
+
+        yield return new WaitForSeconds(time);
+
+        moveSpeed = originSpeed;
     }
 }

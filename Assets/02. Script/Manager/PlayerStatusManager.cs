@@ -12,6 +12,8 @@ public enum StatusType {
 
 public class PlayerStatusManager : Singleton<PlayerStatusManager> {
     private float currentHp;
+    private PlayerCharacterBase player;
+
 
     private readonly Dictionary<StatusType, float> statusDict = new Dictionary<StatusType, float>
     {
@@ -23,7 +25,11 @@ public class PlayerStatusManager : Singleton<PlayerStatusManager> {
 
     private void Start() {
         currentHp = GetStatus(StatusType.HP);
+        SetPlayerCharacter();
     }
+
+    // 플레이어 캐릭터 대입
+    private void SetPlayerCharacter() => player = PlayerController.Instance.GetCharacter();
 
     // 게임 시작 시 상태를 설정하는 함수
     public void SetCharacterStatus(float hp, float strength, float defence, float luck) {
@@ -45,6 +51,10 @@ public class PlayerStatusManager : Singleton<PlayerStatusManager> {
                 MainUIContainer.Instance.UpdateHpPercent(currentHp / maxHp);
             }
         }
+
+        // 플레이어 스탯 반영
+        if (player == null) SetPlayerCharacter();
+        player.UpdateAttackPoint();
     }
 
     // 레벨업에 사용할 올스텟 + 1 함수
@@ -62,6 +72,10 @@ public class PlayerStatusManager : Singleton<PlayerStatusManager> {
         
         // UI 적용
         MainUIContainer.Instance.UpdateHpPercent(currentHp / maxHp);
+        
+        // 플레이어 스탯 반영
+        if (player == null) SetPlayerCharacter();
+        player.UpdateAttackPoint();
     }
 
     // 스테이터스를 가져온다

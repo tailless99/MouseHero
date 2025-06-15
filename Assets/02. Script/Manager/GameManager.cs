@@ -4,6 +4,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     private void Start() {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 }
