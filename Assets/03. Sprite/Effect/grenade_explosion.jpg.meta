@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1d85b002563142a43b874b5ed8c039da
+guid: 5c0ab63b711034d40afcb6032ffa3765
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 540568305860489960
-    second: fc136_0
+      213: 6386785853750207620
+    second: grenade_explosion_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fc136_0
+      name: grenade_explosion_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 0
         y: 0
-        width: 54
-        height: 64
+        width: 7500
+        height: 2500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e236a7920c708700800000000000000
-      internalID: 540568305860489960
+      spriteID: 484654535eb62a850800000000000000
+      internalID: 6386785853750207620
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fc136_0: 540568305860489960
+      grenade_explosion_0: 6386785853750207620
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
