@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4581da45c9651fb46baae09d60fbc4a7, type: 3}
-  m_Name: GetGold
+  m_Name: SkillDraw
   m_EditorClassIdentifier: 
-  skillName: Get Gold
+  skillName: Skill Draw
   cost: 1
-  description: You get money by using skills
-  detailDescription: When you use a skill, you get 30 gold.
-  formula: Get 30 Money
-  skillIcon: {fileID: 540568305860489960, guid: 1d85b002563142a43b874b5ed8c039da, type: 3}
-  skillLogicPrefab: {fileID: 4783395948600579121, guid: 2767d37a69d01b14a9370e6afe7caf16, type: 3}
+  description: Draw a new skill card.
+  detailDescription: Draw a new skill card.
+  formula: 
+  skillIcon: {fileID: 1116881425815931071, guid: 2ed98d601e750fa4f8a74790d5a860c3, type: 3}
+  skillLogicPrefab: {fileID: 9152116402435401291, guid: ab9f8ce10d493674681467bc07b8449c, type: 3}

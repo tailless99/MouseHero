@@ -45,7 +45,7 @@ public class SkillStackSlot : MonoBehaviour
 
         // 스킬 카드 사용 연출
         var parent = transform.parent.GetComponent<UseSkillSlot>();
-        parent.fade();
+        parent?.fade();
     }
 
     /// <summary>

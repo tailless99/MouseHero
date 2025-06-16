@@ -1,5 +1,7 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillStackContainer : MonoBehaviour
@@ -49,6 +51,29 @@ public class SkillStackContainer : MonoBehaviour
         MainUIContainer.Instance.UpdateMoney(-addSkillCost);
     }
 
+    // 새로운 스킬 카드 드로우
+    public void DrawNewSkillCard() {
+        StartCoroutine(DrawSkill());
+    }
+
+    // 슬롯이 빈 곳이 생길 때까지 대기 후 카드 드로우
+    private IEnumerator DrawSkill() {
+        bool IsCanAddSkillCard = false;
+
+        foreach (var slot in slots) {
+            if (!slot.gameObject.activeSelf) { // 사용중이 아닐 때
+                IsCanAddSkillCard = true;
+                break;
+            }
+        }
+
+        // 스킬을 추가할 수 있을 때까지 기다린다.
+        yield return new WaitUntil(() => IsCanAddSkillCard);
+
+        // 스킬 추가
+        FindDeActiveSlot();
+    }
+
     /// <summary>
     /// 슬롯에 삽입된 스킬을 사용하는 함수
     /// Params : 0 - 첫번 째 슬롯의 스킬 사용
@@ -66,6 +91,12 @@ public class SkillStackContainer : MonoBehaviour
             case 2:
                 slots[2].GetComponentInChildren<SkillStackSlot>().UseSkillCard();
                 break;
+        }
+    }
+
+    public void SkillStackReset() {
+        foreach(var skill in slots){
+            skill.gameObject.SetActive(false);
         }
     }
 }

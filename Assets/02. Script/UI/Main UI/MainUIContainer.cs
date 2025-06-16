@@ -52,6 +52,8 @@ public class MainUIContainer : Singleton<MainUIContainer> {
 
     // 플레이어 레벨 반환
     public int GetLevel() => playerEXPContainer.GetLevel();
+
+    public SkillStackContainer GetSkillStackContainer() => useSkillStackContainer.GetSkillStackContainer();
 #endregion
 
     // 풀스크린 UI 오픈 함수 모음

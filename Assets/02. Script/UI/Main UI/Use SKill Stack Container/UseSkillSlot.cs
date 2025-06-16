@@ -26,6 +26,8 @@ public class UseSkillSlot : MonoBehaviour
 
     // 스킬 사용 연출
     public  void fade() {
+        if (!gameObject.activeSelf) return; // 활성화 상태에서 실행
+
         rb.linearVelocityY = upMovingSpeed;
         StartCoroutine(FadeCoroutine(fadeTime));
     }
@@ -35,7 +37,6 @@ public class UseSkillSlot : MonoBehaviour
         float percent = 1;
         
         while(percent > 0) {
-            Debug.Log("percent " + percent);
             time -= Time.deltaTime;
             percent = time / fadeTime;
             ImageAlphaChange(percent);

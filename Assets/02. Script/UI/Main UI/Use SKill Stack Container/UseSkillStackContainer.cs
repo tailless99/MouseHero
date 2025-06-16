@@ -21,4 +21,7 @@ public class UseSkillStackContainer : MonoBehaviour
     /// 버튼에 바인딩되는 스킬 카드를 추가하는 함수
     /// </summary>
     public void AddSkillCard() => skillStackContainer.AddSkillCard();
+
+    // 스킬 스택 컨테이너를 반환
+    public SkillStackContainer GetSkillStackContainer() => skillStackContainer;
 }
