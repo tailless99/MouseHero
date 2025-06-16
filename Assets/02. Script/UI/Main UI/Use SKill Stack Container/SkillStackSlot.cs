@@ -15,11 +15,20 @@ public class SkillStackSlot : MonoBehaviour
         skillStackImg = GetComponent<Image>();
     }
 
+    private void OnDisable() {
+        // 초기화
+        currentSkillObject = null;
+        skillStackImg.sprite = emptyImg;
+        isUseSlot = false;
+    }
+
     /// <summary>
     /// 슬롯을 사용하기 위해 셋팅하는 함수
     /// </summary>
     /// <param name="imgSprite"></param>
     public void SlotSetting(SkillSO skill) {
+        if (skill == null) return;
+
         currentSkillObject = skill;
         skillStackImg.sprite = currentSkillObject.skillIcon;
         isUseSlot = true;
@@ -34,12 +43,9 @@ public class SkillStackSlot : MonoBehaviour
         // 만약 스킬을 실행할 수 없는 상태라면 반환
         if (result == false || result == null) return;
 
-        // 초기화
-        this.gameObject.transform.parent.gameObject.SetActive(false);
-        // 이후 투명해지는 연출
-        currentSkillObject = null;
-        skillStackImg.sprite = emptyImg;
-        isUseSlot = false;
+        // 스킬 카드 사용 연출
+        var parent = transform.parent.GetComponent<UseSkillSlot>();
+        parent.fade();
     }
 
     /// <summary>
