@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GetGold
   m_EditorClassIdentifier: 
   skillName: Get Gold
-  cost: 1
+  cost: 150
   description: You get money by using skills
   detailDescription: When you use a skill, you get 30 gold.
   formula: Get 30 Money

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillDraw
   m_EditorClassIdentifier: 
   skillName: Skill Draw
-  cost: 1
+  cost: 80
   description: Draw a new skill card.
   detailDescription: Draw a new skill card.
   formula: 

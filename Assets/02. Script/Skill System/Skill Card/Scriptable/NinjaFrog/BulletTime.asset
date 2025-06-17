@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BulletTime
   m_EditorClassIdentifier: 
   skillName: Bullet Time
-  cost: 100
+  cost: 150
   description: It has a powerful attack time by consuming cost.
   detailDescription: Enters bullet time for 5 seconds. When used, consumes remaining
     gold from 1 to a maximum of 200, and attack power increases according to the

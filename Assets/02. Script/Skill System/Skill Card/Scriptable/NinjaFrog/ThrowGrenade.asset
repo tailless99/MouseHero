@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4581da45c9651fb46baae09d60fbc4a7, type: 3}
+  m_Name: ThrowGrenade
+  m_EditorClassIdentifier: 
+  skillName: Throw Grenade
+  cost: 45
+  description: Throws a wide ranged grenade that explodes, damaging enemies.
+  detailDescription: '
+
+    Throws a grenade in the direction of the mouse, causing
+    damage in a wide area.'
+  formula: '[ player''s Base Attack ] * 200%'
+  skillIcon: {fileID: -5674919402486608113, guid: 9e9cbe34b531b794eb2a1b3a9f3f2116, type: 3}
+  skillLogicPrefab: {fileID: 1904712250152450879, guid: c4dd2250171fe374c8685ee5f9809ad9, type: 3}
