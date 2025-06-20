@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SurikenBarrage
   m_EditorClassIdentifier: 
   skillName: Suriken Barrage
-  cost: 1
+  cost: 45
   description: Scatter suriken in a circle.
   detailDescription: Scatter shurikens in a circular pattern to attack enemies in
     all directions.

@@ -43,7 +43,11 @@ public class SkillStackContainer : MonoBehaviour
     public void AddSkillCard() {
         // 비용이 충분히 있는지 체크
         if (!MainUIContainer.Instance.CanUseMoney(addSkillCost)) return;
-        
+
+        // 소지 스킬이 0개인지 체크
+        var hasSkillCount = SkillManager.Instance.GetHasSkillList().Count;
+        if (hasSkillCount <= 0) return;
+
         // 스킬 추가
         if (!FindDeActiveSlot()) return;
         
@@ -83,13 +87,13 @@ public class SkillStackContainer : MonoBehaviour
     public void UseSkillCard(int index) {
         switch (index) {
             case 0:
-                slots[0].GetComponentInChildren<SkillStackSlot>().UseSkillCard();
+                slots[0].GetComponentInChildren<SkillStackSlot>().RequestUseSkillCard();
                 break;
             case 1:
-                slots[1].GetComponentInChildren<SkillStackSlot>().UseSkillCard();
+                slots[1].GetComponentInChildren<SkillStackSlot>().RequestUseSkillCard();
                 break;
             case 2:
-                slots[2].GetComponentInChildren<SkillStackSlot>().UseSkillCard();
+                slots[2].GetComponentInChildren<SkillStackSlot>().RequestUseSkillCard();
                 break;
         }
     }

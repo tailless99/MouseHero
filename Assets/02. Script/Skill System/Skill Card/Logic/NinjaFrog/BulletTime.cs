@@ -29,7 +29,7 @@ public class BulletTime : SkillBase
         // 필드의 모든 몬스터에게 슬로우
         foreach(var monster in allMonsters) {
             monster.TryGetComponent<EnemyController>(out var enemy);
-            enemy.EnemySlowlyRoutine(stopTime);
+            enemy.EnemySlowlyRoutine(stopTime, 0.1f); // 감속 시간, 감속 스피드
         }
 
         // 보스 몬스터에게 슬로우

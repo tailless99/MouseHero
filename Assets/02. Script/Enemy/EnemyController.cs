@@ -79,15 +79,19 @@ public class EnemyController : MonoBehaviour
         myCollider.gameObject.SetActive(false);
     }
 
-    // 에너미의 움직임을 느려지게 하는 코루틴
-    public void EnemySlowlyRoutine(float time) {
-        StartCoroutine(EnemySlolyCoroutine(time));
+    /// <summary>
+    /// 에너미의 움직임을 느려지게 하는 코루틴 
+    /// </summary>
+    /// <param name="time">느려지는 시간</param>
+    /// <param name="slowSpeed">0~1 까지의 실수 변수를 넘겨받아 이동속도의 %로 감속</param>
+    public void EnemySlowlyRoutine(float time, float slowSpeed) {
+        StartCoroutine(EnemySlolyCoroutine(time, slowSpeed));
     }
 
     // 에너미 일정시간 느려지는 코루틴
-    private IEnumerator EnemySlolyCoroutine(float time) {
+    private IEnumerator EnemySlolyCoroutine(float time, float slowSpeed) {
         var originSpeed = moveSpeed;
-        moveSpeed *= 0.1f;
+        moveSpeed *= slowSpeed;
 
         yield return new WaitForSeconds(time);
 
