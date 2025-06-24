@@ -29,6 +29,7 @@ public class EnemyController : MonoBehaviour
         enemyDropItem = GetComponent<EnemyDropItem>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     private void Start() {
         player = PlayerController.Instance.GetCharacter();
     }

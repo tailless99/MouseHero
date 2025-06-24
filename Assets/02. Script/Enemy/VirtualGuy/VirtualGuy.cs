@@ -10,8 +10,6 @@ public class VirtualGuy : EnemyController {
     }
 
     protected override void Attack(PlayerHitBox player) {
-        base.Move();
-        
         // 데미지 처리
         player.TakeDamage(enemyStatus.GetAttack(), this.gameObject);
 
