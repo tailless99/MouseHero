@@ -5863,6 +5863,7 @@ MonoBehaviour:
   deathVFX: {fileID: 4578672238706658540, guid: 478cf7729d358c64eaf9f207d0b72abd, type: 3}
   EnemyName: VirtualGuy
   isMoving: 1
+  isDead: 0
 --- !u!114 &216887036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39420,6 +39421,7 @@ MonoBehaviour:
   deathVFX: {fileID: 0}
   EnemyName: Orc
   isMoving: 1
+  isDead: 0
   attackCoolTime: 0.5
 --- !u!114 &1622836421
 MonoBehaviour:
@@ -39449,7 +39451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpSlider: {fileID: 1044227288}
-  maxHp: 1
+  maxHp: 10
   attack: 1
 --- !u!114 &1622836423
 MonoBehaviour:

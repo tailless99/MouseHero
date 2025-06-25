@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private EnemyDropItem enemyDropItem;
 
     public bool isMoving = true;
+    public bool isDead = false;
 
     protected virtual void Awake() {
         animator = GetComponent<Animator>();
@@ -61,13 +62,15 @@ public class EnemyController : MonoBehaviour
     }
 
     // 몸박 공격
-    protected virtual void Attack(PlayerHitBox player) {}
+    protected virtual void Attack(PlayerHitBox player) {
+        if (isDead) return;
+    }
 
     // 플레이어랑 부딪힐 경우 공격 함수 실행
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
             collision.gameObject.TryGetComponent<PlayerHitBox>(out PlayerHitBox playerHitBox);
-            Attack(playerHitBox);
+            if(!isDead) Attack(playerHitBox);
         }
     }
 
@@ -77,7 +80,10 @@ public class EnemyController : MonoBehaviour
     // 에너미가 죽었을 때 작용하는 함수
     public void Die() {
         MainUIContainer.Instance.AddExp(enemyDropItem.GetExp());
-        myCollider.gameObject.SetActive(false);
+        isMoving = false;
+        isDead = true;
+        animator.SetBool("IsMoving", false);
+        //myCollider.gameObject.SetActive(false);
     }
 
     /// <summary>

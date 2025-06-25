@@ -17,11 +17,17 @@ public class Orc : EnemyController {
     }
 
     protected override void Attack(PlayerHitBox player) {
+        base.Attack(player);
+
         StartCoroutine(AttackLoopRoutine(player)); // 공격 반복 루틴 실행
     }
 
     private IEnumerator AttackLoopRoutine(PlayerHitBox player) {
         while(true){
+            // 에너미 사망 체크
+            var isDead = transform.GetComponent<EnemyController>().isDead;
+            if (isDead) yield break; // 에너미가 죽었다면 공격 종료
+
             // 데미지 처리
             player.TakeDamage(enemyStatus.GetAttack(), this.gameObject);
 

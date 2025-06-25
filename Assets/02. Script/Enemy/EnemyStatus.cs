@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,11 +52,22 @@ public class EnemyStatus : MonoBehaviour
     public void Die() {
         // 폭발 이펙트 출력
         var deathVFX = myEnemyController.GetDeathVFX();
-        if (deathVFX) Instantiate(deathVFX, this.gameObject.transform.position, Quaternion.identity);
+        if (deathVFX) { 
+            Instantiate(deathVFX, this.gameObject.transform.position, Quaternion.identity);
+            StartCoroutine(DeathRoutine(0)); // 즉시 사망
+        }
+        else {
+            StartCoroutine(DeathRoutine(2f)); // 지연 사망
+        }
+        
+    }
 
+    private IEnumerator DeathRoutine(float delayTime) {
+        yield return new WaitForSeconds(delayTime); // 딜레이 실행
+        
         // 드랍 아이템 지급
         myEnemyController.DropItem();
-        
+
         // 사용 끝난 몬스터 비활성화
         this.gameObject.SetActive(false);
     }

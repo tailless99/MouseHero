@@ -47,6 +47,6 @@ public class EnemyHitBox : MonoBehaviour
         enemyController.isMoving = false;
         yield return new WaitForSeconds(0.5f);
 
-        enemyController.isMoving = true;
+        if(!enemyController.isDead) enemyController.isMoving = true;
     }
 }
